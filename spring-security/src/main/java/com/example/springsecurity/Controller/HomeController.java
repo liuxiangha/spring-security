@@ -24,9 +24,6 @@ public class HomeController {
     @Autowired
     private UserRoleRepository roleRepository;
 
-    @Autowired
-    private PasswordBeans passwordBeans;
-
     /*
         验证用户的登录状态
      */
@@ -39,45 +36,4 @@ public class HomeController {
 
         return userRole.getUserRole();
     }
-
-//    /**
-//     * 注册新的用户， 注册成功后跳转到登录界面
-//     * @param userRole ： 待注册的用户信息对象
-//     * @return ： 注册成功后的跳转路径
-//     */
-//    @PostMapping(path = "/registerPost")
-//    public String registerPost(@ModelAttribute UserRole userRole) {
-//        String password = userRole.getUserPassword();
-//        String encodePassword = passwordBeans.passwordEncoder().encode(password);
-//        userRole.setUserPassword(encodePassword);
-//        userRole.setUserRole("USER_ROLE");
-//        Long userId = roleRepository.count() + 1;
-//        userRole.setUserId(userId);
-//        userRole.setEnabled(true);
-//
-//        roleRepository.save(userRole);
-//
-//        return "redirect:/login";
-//    }
-//
-//    @GetMapping(path = "/register")
-//    public String register(Model model) {
-//        model.addAttribute("userRole", new UserRole());
-//        return "Register";
-//    }
-//
-//    @RequestMapping(path = "/authenticate", method = {RequestMethod.POST})
-//    public @ResponseBody
-//    Boolean authenticate(@Param("username") String username,
-//                                @Param("password") String password) {
-//        UserRole role = roleRepository.findUserRoleByUsername(username);
-//
-//        /*
-//            由于每次 BCryptPasswordEncoder 的加密结果都不一样， 因此使用 BCryptPasswordEncoder
-//            的 matches 方法来判断输入的原始密码与存储的加密后的密码是否一致
-//         */
-//        return passwordBeans
-//                .passwordEncoder()
-//                .matches(password, role.getPassword());
-//    }
 }
